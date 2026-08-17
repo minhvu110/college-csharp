@@ -1,6 +1,6 @@
 internal class Program
 {
-    private static void Main(string[] args)
+    private static void Main_week1(string[] args)
     {
         Console.WriteLine("hello world");
         Console.WriteLine("anh do ximi");
@@ -8,4 +8,5 @@ internal class Program
         Console.WriteLine("um na na na");
     }
 }
+
 
