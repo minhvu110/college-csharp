@@ -39,7 +39,7 @@ namespace Workspace
             System.Console.WriteLine($"{(char)c} has the ascii of {c}");
             // 8. to Calculate Area of Circle
             double pi = 3.14;
-            double r = 4;
+            double r = 5;
             System.Console.WriteLine($"the area of the circle with r= {r} is {pi * r * r}");
             // 9. to Calculate Area of Square
             int l = 4;
