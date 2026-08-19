@@ -35,11 +35,12 @@ namespace Workspace
             // 7. to Print ASCII Value (tip: read character, print number of this char)
             System.Console.Write("enter a character: ");
             int c = Console.Read();
+            Console.ReadLine();
             System.Console.WriteLine($"{(char)c} has the ascii of {c}");
             // 8. to Calculate Area of Circle
             double pi = 3.14;
-            double r = 5;
-            System.Console.WriteLine($"the area of the circle with r= {r} is {pi * pi * r}");
+            double r = 4;
+            System.Console.WriteLine($"the area of the circle with r= {r} is {pi * r * r}");
             // 9. to Calculate Area of Square
             int l = 4;
             System.Console.WriteLine($"the area of the square with l= {l} is {l * l}");
