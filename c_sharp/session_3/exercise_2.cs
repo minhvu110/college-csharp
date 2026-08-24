@@ -394,71 +394,49 @@ namespace Workspace
                     break;
                 }
             } while (true);
-            System.Console.WriteLine($"Tổng thời gian đỗ: {temp.TotalHours:f2} => Tính phí: {elasped} giờ");
-            if (CheckOut.Day > CheckIn.Day)
+            System.Console.WriteLine($"Tổng thời gian đỗ: {temp.TotalHours:f2} giờ => Tính phí: {elasped} giờ");
+            if (CheckOut.Date > CheckIn.Date)
             {
                 fine = 30000;
                 System.Console.WriteLine($"Phụ phí qua đêm: {fine} VNĐ");
             }
-            int total_money = 0;
+            decimal total_money = 0;
+            decimal cap = 0;
+            decimal rate = 0;
             switch (type.ToLower())
             {
                 case "motorbike":
-                    if (elasped > 2.0)
-                    {
-                        int cap = 5000;
-                        elasped = elasped - 2;
-                        total_money += (int)elasped * 2000;
-                        System.Console.WriteLine("Phí 2 giờ đầu: 5,000 VNĐ");
-                        System.Console.WriteLine($"Phí {elasped} giờ tiếp theo: {(total_money):C0} VNĐ (2,000 *{elasped})");
-                        System.Console.WriteLine($"TỔNG PHÍ ĐỖ XE: {(cap + total_money + fine):C0} VNĐ");
-
-                    }
-                    else if (elasped <= 2.0)
-                    {
-                        int cap = 5000;
-                        System.Console.WriteLine("Phí 2 giờ đầu: 5,000 VNĐ");
-                        System.Console.WriteLine($"TỔNG PHÍ ĐỖ XE: {(cap + total_money + fine):C0} VNĐ");
-                    }
+                    cap = 5000m;
+                    rate = 2000m;
                     break;
                 case "car":
-                    if (elasped > 2.0)
-                    {
-                        int cap = 20000;
-                        elasped = elasped - 2;
-                        total_money += (int)elasped * 10000;
-                        System.Console.WriteLine("Phí 2 giờ đầu: 20,000 VNĐ");
-                        System.Console.WriteLine($"Phí {elasped} giờ tiếp theo: {(total_money):C0} VNĐ (10,000 * {elasped})");
-                        System.Console.WriteLine($"TỔNG PHÍ ĐỖ XE: {(cap + total_money + fine):C0} VNĐ");
-
-                    }
-                    else if (elasped <= 2.0)
-                    {
-                        int cap = 20000;
-                        System.Console.WriteLine("Phí 2 giờ đầu: 20,000 VNĐ");
-                        System.Console.WriteLine($"TỔNG PHÍ ĐỖ XE: {(cap + total_money + fine):C0} VNĐ");
-                    }
+                    cap = 20000m;
+                    rate = 10000m;
                     break;
                 case "truck":
-
-                    if (elasped > 2.0)
-                    {
-                        int cap = 50000;
-                        elasped = elasped - 2;
-                        total_money += (int)elasped * 25000;
-                        System.Console.WriteLine("Phí 2 giờ đầu: 50,000 VNĐ");
-                        System.Console.WriteLine($"Phí {elasped} giờ tiếp theo: {(total_money):C0} VNĐ (25,000 * {elasped})");
-                        System.Console.WriteLine($"TỔNG PHÍ ĐỖ XE: {(cap + total_money + fine):C0} VNĐ");
-
-                    }
-                    else if (elasped <= 2.0)
-                    {
-                        int cap = 50000;
-                        System.Console.WriteLine("Phí 2 giờ đầu: 50,000 VNĐ");
-                        System.Console.WriteLine($"TỔNG PHÍ ĐỖ XE: {(cap + total_money + fine):C0} VNĐ");
-                    }
+                    cap = 50000m;
+                    rate = 25000m;
                     break;
+            }
+            decimal extra = (decimal)Math.Max(0, elasped - 2);
+            if (extra > 0)
+            {
+                elasped = elasped - 2;
+                total_money += (int)elasped * rate;
+                System.Console.WriteLine($"Phí 2 giờ đầu: {cap:C0} VNĐ");
+                System.Console.WriteLine($"Phí {elasped} giờ tiếp theo: {(total_money):C0} VNĐ (2,000 * {elasped})");
+                System.Console.WriteLine($"TỔNG PHÍ ĐỖ XE: {(cap + total_money + fine):C0} VNĐ");
+            }
+            else
+            {
+                System.Console.WriteLine($"Phí 2 giờ đầu: {cap} VNĐ");
+                System.Console.WriteLine($"TỔNG PHÍ ĐỖ XE: {(cap + fine):C0} VNĐ");
             }
         }
     }
 }
+
+
+
+
+
