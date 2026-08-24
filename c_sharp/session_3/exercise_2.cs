@@ -1,7 +1,9 @@
 using System;
 using System.Diagnostics.Contracts;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.Marshalling;
 using System.Text;
+
 
 namespace Workspace
 {
@@ -11,7 +13,7 @@ namespace Workspace
         {
 
             Console.OutputEncoding = Encoding.UTF8;
-            bai12();
+            bai13();
             //Console.ReadKey();
         }
         static void bai1()
@@ -302,7 +304,7 @@ namespace Workspace
             decimal net = gross - insurance - tncn;
             System.Console.WriteLine($"LƯƠNG NET THỰC NHẬN: {net:C0} VNĐ");
         }
-       //unsolved
+        //unsolved
         static void bai10()
         {
 
@@ -310,16 +312,16 @@ namespace Workspace
         static void bai11()
         {
             System.Console.Write("Số tiền gửi: ");
-            decimal p =Convert.ToDecimal(System.Console.ReadLine());
+            decimal p = Convert.ToDecimal(System.Console.ReadLine());
             System.Console.Write("Lãi suất năm: ");
-            double r= Convert.ToDouble(System.Console.ReadLine());
+            double r = Convert.ToDouble(System.Console.ReadLine());
             System.Console.Write("Thời gian gửi: ");
             int n = Convert.ToInt32(System.Console.ReadLine());
             decimal si = p * ((decimal)r / 100m) * ((decimal)n / 12.0m);
-            decimal ci = (decimal)((double)p*Math.Pow((1 + (r / 100.0) / 12.0), n))-p;
+            decimal ci = (decimal)((double)p * Math.Pow((1 + (r / 100.0) / 12.0), n)) - p;
             System.Console.WriteLine($"Tổng tiền lãi (Lãi đơn): {si:C0} VNĐ");
             System.Console.WriteLine($"Tổng tiền lãi (Lãi kép): {ci:C0} VNĐ");
-            System.Console.WriteLine($"Lợi nhuận chênh lệch: {(ci-si):C0} VNĐ");
+            System.Console.WriteLine($"Lợi nhuận chênh lệch: {(ci - si):C0} VNĐ");
         }
         static void bai12()
         {
@@ -328,11 +330,11 @@ namespace Workspace
                 string ceasar = "";
                 foreach (char c in text)
                 {
-                    if(char.IsUpper(c)==true)
+                    if (char.IsUpper(c) == true)
                     {
                         ceasar += (char)('A' + (c - 'A' + shift) % 26);
                     }
-                    else if(char.IsLower(c)==true)
+                    else if (char.IsLower(c) == true)
                     {
                         ceasar += (char)('a' + (c - 'a' + shift) % 26);
                     }
@@ -351,6 +353,112 @@ namespace Workspace
             string decrypted = cypher_decypher(encrypted, 26 - k);
             System.Console.WriteLine($"Văn bản Mã hóa: {encrypted}");
             System.Console.WriteLine($"Văn bản Giải mã: {decrypted}");
+        }
+        static void bai13()
+        {
+            string type;
+            decimal fine = 0;
+            do
+            {
+                System.Console.Write("Loại xe: ");
+                type = System.Console.ReadLine();
+                if (type.ToLower() == "car" || type.ToLower() == "motorbike" || type.ToLower() == "truck")
+                {
+                    break;
+                }
+                else
+                {
+                    System.Console.WriteLine("Wrong vehicle");
+                    continue;
+                }
+            } while (true);
+            DateTime CheckIn;
+            DateTime CheckOut;
+            TimeSpan temp;
+            double elasped;
+            do
+            {
+                System.Console.Write("Giờ vào: ");
+                CheckIn = DateTime.Parse(System.Console.ReadLine());
+                System.Console.Write("Giờ ra: ");
+                CheckOut = DateTime.Parse(System.Console.ReadLine());
+                temp = CheckOut - CheckIn;
+                elasped = Math.Ceiling(temp.TotalHours);
+                if (elasped <= 0)
+                {
+                    System.Console.WriteLine("Invalid time");
+                    continue;
+                }
+                else
+                {
+                    break;
+                }
+            } while (true);
+            System.Console.WriteLine($"Tổng thời gian đỗ: {temp.TotalHours:f2} => Tính phí: {elasped} giờ");
+            if (CheckOut.Day > CheckIn.Day)
+            {
+                fine = 30000;
+                System.Console.WriteLine($"Phụ phí qua đêm: {fine} VNĐ");
+            }
+            int total_money = 0;
+            switch (type.ToLower())
+            {
+                case "motorbike":
+                    if (elasped > 2.0)
+                    {
+                        int cap = 5000;
+                        elasped = elasped - 2;
+                        total_money += (int)elasped * 2000;
+                        System.Console.WriteLine("Phí 2 giờ đầu: 5,000 VNĐ");
+                        System.Console.WriteLine($"Phí {elasped} giờ tiếp theo: {(total_money):C0} VNĐ (2,000 *{elasped})");
+                        System.Console.WriteLine($"TỔNG PHÍ ĐỖ XE: {(cap + total_money + fine):C0} VNĐ");
+
+                    }
+                    else if (elasped <= 2.0)
+                    {
+                        int cap = 5000;
+                        System.Console.WriteLine("Phí 2 giờ đầu: 5,000 VNĐ");
+                        System.Console.WriteLine($"TỔNG PHÍ ĐỖ XE: {(cap + total_money + fine):C0} VNĐ");
+                    }
+                    break;
+                case "car":
+                    if (elasped > 2.0)
+                    {
+                        int cap = 20000;
+                        elasped = elasped - 2;
+                        total_money += (int)elasped * 10000;
+                        System.Console.WriteLine("Phí 2 giờ đầu: 20,000 VNĐ");
+                        System.Console.WriteLine($"Phí {elasped} giờ tiếp theo: {(total_money):C0} VNĐ (10,000 * {elasped})");
+                        System.Console.WriteLine($"TỔNG PHÍ ĐỖ XE: {(cap + total_money + fine):C0} VNĐ");
+
+                    }
+                    else if (elasped <= 2.0)
+                    {
+                        int cap = 20000;
+                        System.Console.WriteLine("Phí 2 giờ đầu: 20,000 VNĐ");
+                        System.Console.WriteLine($"TỔNG PHÍ ĐỖ XE: {(cap + total_money + fine):C0} VNĐ");
+                    }
+                    break;
+                case "truck":
+
+                    if (elasped > 2.0)
+                    {
+                        int cap = 50000;
+                        elasped = elasped - 2;
+                        total_money += (int)elasped * 25000;
+                        System.Console.WriteLine("Phí 2 giờ đầu: 50,000 VNĐ");
+                        System.Console.WriteLine($"Phí {elasped} giờ tiếp theo: {(total_money):C0} VNĐ (25,000 * {elasped})");
+                        System.Console.WriteLine($"TỔNG PHÍ ĐỖ XE: {(cap + total_money + fine):C0} VNĐ");
+
+                    }
+                    else if (elasped <= 2.0)
+                    {
+                        int cap = 50000;
+                        System.Console.WriteLine("Phí 2 giờ đầu: 50,000 VNĐ");
+                        System.Console.WriteLine($"TỔNG PHÍ ĐỖ XE: {(cap + total_money + fine):C0} VNĐ");
+                    }
+                    break;
+            }
         }
     }
 }
