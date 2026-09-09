@@ -1,7 +1,4 @@
 using System;
-using System.Diagnostics.Contracts;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.Marshalling;
 using System.Text;
 
 
@@ -13,8 +10,52 @@ namespace Workspace
         {
 
             Console.OutputEncoding = Encoding.UTF8;
+            bai1();
+            Console.ReadKey();
+            System.Console.WriteLine("next");
+
+            bai2();
+            Console.ReadKey();
+            System.Console.WriteLine("next");
+
+            bai3();
+            Console.ReadKey();
+            System.Console.WriteLine("next");
+
+            bai4();
+            Console.ReadKey();
+            System.Console.WriteLine("next");
+
+            bai5();
+            Console.ReadKey();
+            System.Console.WriteLine("next");
+
+            bai6();
+            Console.ReadKey();
+            System.Console.WriteLine("next");
+
+            bai7();
+            Console.ReadKey();
+            System.Console.WriteLine("next");
+
+            bai8();
+            Console.ReadKey();
+            System.Console.WriteLine("next");
+
+            bai9();
+            Console.ReadKey();
+            System.Console.WriteLine("next");
+
+            bai11();
+            Console.ReadKey();
+            System.Console.WriteLine("next");
+
+            bai12();
+            Console.ReadKey();
+            System.Console.WriteLine("next");
+
             bai13();
-            //Console.ReadKey();
+            Console.ReadKey();
         }
         static void bai1()
         {
@@ -433,6 +474,8 @@ namespace Workspace
                 System.Console.WriteLine($"TỔNG PHÍ ĐỖ XE: {(cap + fine):C0} VNĐ");
             }
         }
+
+
     }
 }
 
