@@ -24,7 +24,7 @@ namespace Workspace
             System.Console.Write("Enter your word: ");
             string word_to_check = Console.ReadLine();
             string[] array = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            if(LinearSearch(array,word_to_check))
+            if (LinearSearch(array, word_to_check))
             {
                 System.Console.WriteLine($"the word {word_to_check} does appear in the sentence");
             }
@@ -35,11 +35,11 @@ namespace Workspace
         }
         static int[] Bubble_Sort(int[] array)
         {
-            for (int i = 0; i < array.Length-1; i++)
+            for (int i = 0; i < array.Length - 1; i++)
             {
-                for (int j = 0; j < array.Length-1-i; j++)
+                for (int j = 0; j < array.Length - 1 - i; j++)
                 {
-                    if(array[j]>array[j+1])
+                    if (array[j] > array[j + 1])
                     {
                         int temp = array[j];
                         array[j] = array[j + 1];
@@ -55,7 +55,7 @@ namespace Workspace
             {
                 array[i] = array[i].ToLower();
                 sentence = sentence.ToLower();
-                if(array[i]==sentence) return true;
+                if (array[i] == sentence) return true;
             }
             return false;
         }

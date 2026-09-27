@@ -187,17 +187,12 @@ namespace Workspace
 
         static int UCLN(int a, int b)
         {
-            int temp = 0;
-            if (b > a)
-            {
-                int buffer = 0;
-                buffer = a;
-                a = b;
-                b = buffer;
-            }
+            a = Math.Abs(a);
+            b = Math.Abs(b);
+
             while (b != 0)
             {
-                temp = a % b;
+                int temp = a % b;
                 a = b;
                 b = temp;
             }
